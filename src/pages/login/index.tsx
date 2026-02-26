@@ -1,15 +1,35 @@
 import { Link } from "react-router-dom"
 import Input from "../../components/input"
 import { useState } from "react"
+import { auth } from "../../services/firebaseconnection"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { useNavigate } from "react-router-dom"
 
 export default function Login(){
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
 
     function handleSubmit(e:SubmitEvent){
         e.preventDefault()
         
+        if(email === "" || password ===""){
+            alert("Insira um email e senha válidos para continuar")
+            return
+        }
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then(()=>{
+            navigate("/admin",{replace: true})
+            console.log("Logado com sucesso!")
+        })
+        .catch((error)=>{
+            console.log("Erro ao fazer login: ")
+            console.log(error)
+        })
+
+
     }
 
     return(

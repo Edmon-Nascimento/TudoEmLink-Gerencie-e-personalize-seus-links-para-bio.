@@ -6,4 +6,8 @@ export type Social = {
     children: ReactNode
 }
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+export type PrivateProps = {
+    children: ReactNode
+}
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{}
